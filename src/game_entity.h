@@ -5,7 +5,9 @@
 
 class Game_entity {
     protected:
-        
+            
+
+
     public:
         Game_entity(/* args */);
         ~Game_entity();

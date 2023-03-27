@@ -3,7 +3,7 @@
 
 int main()
 {  
-    Game game(1000, 1000, "2137");
-    game.run();
+    Game game(1000, 700, "Welcome to the game!");
+    game.mainMenu();
     return 0;
 }
