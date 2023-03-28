@@ -41,19 +41,20 @@ void Game::mainMenu() {
     Custom_Text game_title("ASTEROIDS", 70, this->WINDOW_WIDTH / 2, (1.0/4.0) * this->WINDOW_HEIGHT, sf::Color::White);
     game_title.align_center();
 
-    Custom_Text option1("Option 1", 50, this->WINDOW_WIDTH/2, this->WINDOW_HEIGHT/2, sf::Color::White);
-    option1.align_center();
-    Custom_Text option2("Option 2", 50, this->WINDOW_WIDTH/2, this->WINDOW_HEIGHT/2 + 60, sf::Color::White);
-    option2.align_center();
-    Custom_Text option3("Option 3", 50, this->WINDOW_WIDTH/2, this->WINDOW_HEIGHT/2 + 120, sf::Color::White);
-    option3.align_center();
+    Custom_Text opt1("Option 1", 50, this->WINDOW_WIDTH/2, this->WINDOW_HEIGHT/2, sf::Color::White);
+    opt1.align_center();
+    Custom_Text opt2("Option 2", 50, this->WINDOW_WIDTH/2, this->WINDOW_HEIGHT/2 + 60, sf::Color::White);
+    opt2.align_center();
+    Custom_Text opt3("Option 3", 50, this->WINDOW_WIDTH/2, this->WINDOW_HEIGHT/2 + 120, sf::Color::White);
+    opt3.align_center();
 
     Custom_Text author("Created by Bartek Cichy", 30, this->WINDOW_WIDTH, this->WINDOW_HEIGHT-30, sf::Color::White);
     author.align_right();
+    author.set_underline(true);
 
-    
+    int menuIndex = 0;
 
-    std::vector<Custom_Text> todraw{game_title, option1, option2, option3, author};
+    window->setFramerateLimit(60);
 
     while (window->isOpen()){
         sf::Event e;
@@ -62,14 +63,45 @@ void Game::mainMenu() {
                 window->close();
                 std::cout << "window closed" << std::endl;
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
-                std::cout<<"Q pressed!"<<std::endl;
+            if (e.type == sf::Event::KeyReleased) {
+                switch (e.key.code) {
+                    case sf::Keyboard::Down:
+                        menuIndex = menuIndex < 2 ? menuIndex + 1 : menuIndex;
+                        break;
+                    case sf::Keyboard::Up:
+                        menuIndex = menuIndex > 0 ? menuIndex - 1 : menuIndex;
+                        break;
+                    case sf::Keyboard::Q:
+                        std::cout<<"Q pressed! index => "<< menuIndex <<std::endl;
+                        break;
+                }
             }
         }
-        
-        for(Custom_Text it : todraw) {
-            it.draw(window);
+        window->clear();
+
+        switch(menuIndex) {
+            case 0:
+                opt1.set_underline(true);
+                opt2.set_underline(false);
+                opt3.set_underline(false);
+                break;
+            case 1:
+                opt2.set_underline(true);
+                opt1.set_underline(false);
+                opt3.set_underline(false);
+                break;
+            case 2:
+                opt3.set_underline(true);
+                opt2.set_underline(false);
+                opt1.set_underline(false);
+                break;
         }
+        
+        game_title.draw(window);
+        opt1.draw(window);
+        opt2.draw(window);
+        opt3.draw(window);
+        author.draw(window);
 
         window->display();
     }

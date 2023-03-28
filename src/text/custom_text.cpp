@@ -33,3 +33,11 @@ void Custom_Text::align_left() {
 void Custom_Text::align_right() {
     this->custom_text.setOrigin(this->custom_text.getLocalBounds().left + this->custom_text.getLocalBounds().width + 10, this->custom_text.getLocalBounds().top + this->custom_text.getLocalBounds().height / 2);
 }
+
+void Custom_Text::set_bold(bool value) {
+    this->custom_text.setStyle(value ? sf::Text::Bold : sf::Text::Regular);
+}
+
+void Custom_Text::set_underline(bool value) {
+    this->custom_text.setStyle(value ? sf::Text::Underlined : sf::Text::Regular);
+}
