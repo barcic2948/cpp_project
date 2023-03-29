@@ -3,7 +3,9 @@
 
 int main()
 {  
-    Game game(1000, 700, "Welcome to the game!");
-    game.mainMenu();
+    Game tgame;
+    if(tgame.init()) {
+        tgame.mainMenu();
+    }
     return 0;
 }
