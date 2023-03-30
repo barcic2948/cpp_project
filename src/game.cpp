@@ -37,9 +37,10 @@ void Game::run() {
 void Game::mainMenu() {
     
     Custom_Text text2(10, 10, 20, "TSOKURWAAAAAA", sf::Color::White, font);
-    Custom_Button button(100, 100, 500, 100, font, "123", sf::Color::White, sf::Color::Blue);
+    Custom_Button button(100, 100, 500, 100, font, "123", sf::Color::White, 30, this->color_button, this->color_button_on);
 
     while (window->isOpen()){
+        sf::Vector2i position = sf::Mouse::getPosition(*window);
         sf::Event e;
         while (window->pollEvent(e)) {
             if (e.type == sf::Event::Closed) {
@@ -59,8 +60,9 @@ void Game::mainMenu() {
         }
 
 
-        window->clear();
+        window->clear(this->color_background);
         text2.draw(window);
+        button.update(position);
         button.draw(window);
         
         window->display();

@@ -17,12 +17,18 @@
 class Game : public GenericGame {
     
     private:
-        std::string font_path = "C:\\Users\\barci\\Desktop\\cpp_project\\fonts\\CenturyGothic.ttf";
+        std::string font_path = "/home/ltafker/Desktop/code/cpp_project/fonts/CenturyGothic.ttf";
 
     protected:
         int WINDOW_WIDTH = 1000;
-        int WINDOW_HEIGHT = 1000;
+        int WINDOW_HEIGHT = 700;
         sf::Font font;
+
+
+        sf::Color color_background = sf::Color(70, 100, 110, 150);
+        sf::Color color_button = sf::Color(50, 50, 50, 255);
+        sf::Color color_button_on = sf::Color(100, 100, 100, 255);
+
         
     public:
         Game();

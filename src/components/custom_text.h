@@ -11,7 +11,7 @@ class Custom_Text {
     protected:
         sf::Text *custom_text;
     public:
-        Custom_Text(float x, float y, int charSize, std::string text,  sf::Color color, sf::Font &font);
+        Custom_Text(float x, float y, int charSize, std::string text, sf::Color color, sf::Font &font);
         ~Custom_Text();
         void draw(sf::RenderWindow* window);
         
