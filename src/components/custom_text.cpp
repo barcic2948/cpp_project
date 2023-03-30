@@ -17,3 +17,7 @@ Custom_Text::~Custom_Text() {
 void Custom_Text::draw(sf::RenderWindow* window) {
     window->draw(*custom_text);
 }
+
+void Custom_Text::center() {
+    custom_text->setPosition(custom_text->getPosition().x - ((custom_text->getLocalBounds().width + custom_text->getLocalBounds().left) / 2), this->custom_text->getPosition().y);
+}

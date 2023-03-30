@@ -24,6 +24,8 @@ public:
     void draw(sf::RenderWindow *window);
 
     bool update(const sf::Vector2i mouse_position);
+
+    void center();
 };
 
 

@@ -36,10 +36,14 @@ void Game::run() {
 
 void Game::mainMenu() {
     
-    Custom_Text title(100, 20, 80, "ASTEROIDS", sf::Color::White, font);
-    Custom_Button game_start(100, 300, 410, 60, font, "Start the game", sf::Color::White, 30, this->color_button, this->color_button_on);
-    Custom_Button options(100, 380, 410, 60, font, "Options", sf::Color::White, 30, this->color_button, this->color_button_on);
-    Custom_Button quit(100, 460, 410, 60, font, "Quit", sf::Color::White, 30, this->color_button, this->color_button_on);
+    Custom_Text title(WINDOW_WIDTH/2, 100, 80, "ASTEROIDS", sf::Color::White, font);
+    title.center();
+    Custom_Button game_start(WINDOW_WIDTH/2, 300, 410, 60, font, "Start the game", sf::Color::White, 30, this->color_button, this->color_button_on);
+    game_start.center();
+    Custom_Button options(WINDOW_WIDTH/2, 380, 410, 60, font, "Options", sf::Color::White, 30, this->color_button, this->color_button_on);
+    options.center();
+    Custom_Button quit(WINDOW_WIDTH/2, 460, 410, 60, font, "Quit", sf::Color::White, 30, this->color_button, this->color_button_on);\
+    quit.center();
     
     while (window->isOpen()) {
         sf::Vector2i position = sf::Mouse::getPosition(*window);

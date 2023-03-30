@@ -42,3 +42,8 @@ bool Custom_Button::update(const sf::Vector2i mouse_position) {
     shape->setFillColor(this->button_color);
     return false;   
 }
+
+void Custom_Button::center() {
+    text->setPosition(shape->getPosition().x - ((text->getLocalBounds().width + text->getLocalBounds().left) / 2), this->text->getPosition().y);
+    shape->setPosition(shape->getPosition().x - ((shape->getLocalBounds().width + shape->getLocalBounds().left) / 2), this->shape->getPosition().y);
+}
