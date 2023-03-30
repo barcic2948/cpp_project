@@ -25,7 +25,7 @@ class Game : public GenericGame {
         sf::Font font;
 
 
-        sf::Color color_background = sf::Color(70, 100, 110, 150);
+        sf::Color color_background = sf::Color(30, 60, 70, 255);
         sf::Color color_button = sf::Color(50, 50, 50, 255);
         sf::Color color_button_on = sf::Color(100, 100, 100, 255);
 

@@ -34,11 +34,11 @@ void Custom_Button::draw(sf::RenderWindow* window) {
     window->draw(*text);
 }
 
-void Custom_Button::update(const sf::Vector2i mouse_position) {
+bool Custom_Button::update(const sf::Vector2i mouse_position) {
     if (shape->getGlobalBounds().contains(static_cast<sf::Vector2f>(mouse_position))) {
         shape->setFillColor(this->hover_color);
+        return true;
     }
-    else {
-        shape->setFillColor(this->button_color);
-    }
+    shape->setFillColor(this->button_color);
+    return false;   
 }

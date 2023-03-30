@@ -23,7 +23,7 @@ public:
     ~Custom_Button();
     void draw(sf::RenderWindow *window);
 
-    void update(const sf::Vector2i mouse_position);
+    bool update(const sf::Vector2i mouse_position);
 };
 
 
