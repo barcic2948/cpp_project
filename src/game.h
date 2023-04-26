@@ -20,8 +20,10 @@ class Game : public GenericGame {
         sf::Color *text_color = new sf::Color(254, 254, 254, 255);
         sf::Color *hover_color = new sf::Color(100, 100, 100, 255);
 
+        std::vector<Component*> menu_elements;
+        std::vector<Component*> option_elements;
+
         std::vector<Component*> game_elements;
-        std::vector<Component*> game_elements_sim;
 
         void main_menu();
         void play();

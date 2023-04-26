@@ -47,10 +47,7 @@ void Game::main_menu() {
     Button *options = new Button(20, 150, 330, 40, "Options", this->font, 30, this->gate_color, this->text_color, this->hover_color);
     Button *quit = new Button(20, 200, 330, 40, "Quit", this->font, 30, this->gate_color, this->text_color, this->hover_color);
 
-    this->game_elements.push_back(title);
-    this->game_elements.push_back(game_start);
-    this->game_elements.push_back(options);
-    this->game_elements.push_back(quit);
+    this->game_elements = {title, game_start, options, quit};
 
     while (this->window->isOpen()){
         sf::Event e;
@@ -91,15 +88,12 @@ void Game::options() {
 
     this->clear();
 
-    Custom_Text *title = new Custom_Text(20, 20, "CHUJ World", this->font, 60, this->text_color);
-    Button *game_start = new Button(20, 100, 330, 40, "Main menu", this->font, 30, this->gate_color, this->text_color, this->hover_color);
-    Button *options = new Button(20, 150, 330, 40, "Options", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+    Custom_Text *title = new Custom_Text(20, 20, "Options", this->font, 60, this->text_color);
+    Button *option1 = new Button(20, 100, 330, 40, "Option 1", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+    Button *return_to_menu = new Button(20, 150, 330, 40, "Return to main menu", this->font, 30, this->gate_color, this->text_color, this->hover_color);
     Button *quit = new Button(20, 200, 330, 40, "Quit", this->font, 30, this->gate_color, this->text_color, this->hover_color);
 
-    this->game_elements.push_back(title);
-    this->game_elements.push_back(game_start);
-    this->game_elements.push_back(options);
-    this->game_elements.push_back(quit);
+    this->game_elements = {title, option1, return_to_menu, quit};
 
     while (this->window->isOpen()){
         sf::Event e;
@@ -114,11 +108,12 @@ void Game::options() {
             }
             else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 std::cout << "Mouse pressed" << std::endl;
-                if(game_start->getHover()) {
+                if(option1->getHover()) {
                     std::cout << "Start game" << std::endl;
                 }
-                else if (options->getHover()){
-                    std::cout << "Options" << std::endl;
+                else if (return_to_menu->getHover()){
+                    std::cout << "Retrun to menu" << std::endl;
+                    this->main_menu();
                 }
                 else if (quit->getHover()) {
                     this->window->close();
@@ -133,4 +128,9 @@ void Game::options() {
             this->window->display();
         }
     }
+}
+
+void Game::play() {
+    this->clear();
+    
 }
