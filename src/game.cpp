@@ -3,8 +3,15 @@
 Game::Game() {}
 
 Game::~Game() {
+    for(auto it : game_elements) { delete it; }
+    std::cout << "Game entities removed" << std::endl;
+
+    delete this->gate_color;
+    delete this->text_color;
+    delete this->hover_color;
     delete this->window;
-    std::cout << "Removed window!" << std::endl;
+
+    std::cout << "Removed window and colors" << std::endl;
 }
 
 bool Game::init() {
@@ -12,79 +19,118 @@ bool Game::init() {
     if (!this->font.loadFromFile(this->font_path)) {return false;}
     else { std::cout<<"Read font from file."<<std::endl;}
 
-    window = new sf::RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "ASTEROIDS");
+    window = new sf::RenderWindow(sf::VideoMode(this->window_width, this->window_height), "ASTEROIDS");
     window->setFramerateLimit(60);
     std::cout << "Created widnow!" << std::endl;
     return true;
 }
 
 void Game::run() {
-    while (window->isOpen()){
+    this->main_menu();
+}
+
+void Game::clear() {
+    std::cout << "Clearing vector: ";
+    for (auto it : this->game_elements) {
+        delete it;
+    }
+    this->game_elements.clear();
+    std::cout << "Removed all elements" << std::endl;
+}
+
+void Game::main_menu() {
+
+    this->clear();
+
+    Custom_Text *title = new Custom_Text(20, 20, "Hello World", this->font, 60, this->text_color);
+    Button *game_start = new Button(20, 100, 330, 40, "Main menu", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+    Button *options = new Button(20, 150, 330, 40, "Options", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+    Button *quit = new Button(20, 200, 330, 40, "Quit", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+
+    this->game_elements.push_back(title);
+    this->game_elements.push_back(game_start);
+    this->game_elements.push_back(options);
+    this->game_elements.push_back(quit);
+
+    while (this->window->isOpen()){
         sf::Event e;
-        while (window->pollEvent(e)){
+        while (this->window->pollEvent(e)){
             if (e.type == sf::Event::Closed) {
-                window->close();
+                this->window->close();
                 std::cout << "window closed" << std::endl;
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
-                window->clear();
+                this->window->clear();
                 std::cout<<"Q pressed!"<<std::endl;
             }
+            else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                std::cout << "Mouse pressed" << std::endl;
+                if(game_start->getHover()) {
+                    std::cout << "Start game" << std::endl;
+                }
+                else if (options->getHover()){
+                    std::cout << "Options" << std::endl;
+                    this->options();
+                }
+                else if (quit->getHover()) {
+                    this->window->close();
+                }
+            }
+
+            for(auto it : game_elements) {
+                it->update(this->window);
+            }
+            this->window->clear();
+            for(auto it : game_elements) {it->draw(this->window);}
+            this->window->display();
         }
     }
 }
 
-void Game::mainMenu() {
-    
-    Custom_Text title(WINDOW_WIDTH/2, 100, 80, "ASTEROIDS", sf::Color::White, font);
-    title.center();
-    Custom_Button game_start(WINDOW_WIDTH/2, 300, 410, 60, font, "Start the game", sf::Color::White, 30, this->color_button, this->color_button_on);
-    game_start.center();
-    Custom_Button options(WINDOW_WIDTH/2, 380, 410, 60, font, "Options", sf::Color::White, 30, this->color_button, this->color_button_on);
-    options.center();
-    Custom_Button quit(WINDOW_WIDTH/2, 460, 410, 60, font, "Quit", sf::Color::White, 30, this->color_button, this->color_button_on);\
-    quit.center();
-    
-    while (window->isOpen()) {
-        sf::Vector2i position = sf::Mouse::getPosition(*window);
+void Game::options() {
+
+    this->clear();
+
+    Custom_Text *title = new Custom_Text(20, 20, "CHUJ World", this->font, 60, this->text_color);
+    Button *game_start = new Button(20, 100, 330, 40, "Main menu", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+    Button *options = new Button(20, 150, 330, 40, "Options", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+    Button *quit = new Button(20, 200, 330, 40, "Quit", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+
+    this->game_elements.push_back(title);
+    this->game_elements.push_back(game_start);
+    this->game_elements.push_back(options);
+    this->game_elements.push_back(quit);
+
+    while (this->window->isOpen()){
         sf::Event e;
-        while (window->pollEvent(e)) {
+        while (this->window->pollEvent(e)){
             if (e.type == sf::Event::Closed) {
-                window->close();
+                this->window->close();
                 std::cout << "window closed" << std::endl;
             }
-            if (game_start.update(position)) {
-                if (e.type == sf::Event::MouseButtonReleased) {
-                    if (e.mouseButton.button == sf::Mouse::Left) {
-                        std::cout << "WAT" << std::endl;
-                    }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+                this->window->clear();
+                std::cout<<"Q pressed!"<<std::endl;
+            }
+            else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                std::cout << "Mouse pressed" << std::endl;
+                if(game_start->getHover()) {
+                    std::cout << "Start game" << std::endl;
+                }
+                else if (options->getHover()){
+                    std::cout << "Options" << std::endl;
+                }
+                else if (quit->getHover()) {
+                    this->window->close();
                 }
             }
-            if (options.update(position)) {
-                if (e.type == sf::Event::MouseButtonReleased) {
-                    if (e.mouseButton.button == sf::Mouse::Left) {
-                        std::cout << "WAT" << std::endl;
-                    }
-                }
+
+            for(auto it : game_elements) {
+                it->update(this->window);
             }
-            if (quit.update(position)) {
-                if (e.type == sf::Event::MouseButtonReleased) {
-                    if (e.mouseButton.button == sf::Mouse::Left) {
-                        window->close();
-                        std::cout << "window closed" << std::endl;
-                    }
-                }
-            }
+            this->window->clear();
+            for(auto it : game_elements) {it->draw(this->window);}
+            this->window->display();
         }
-
-
-        window->clear(this->color_background);
-        title.draw(window);
-        game_start.draw(window);
-        options.draw(window);
-        quit.draw(window);
-        
-        window->display();
     }
-    
 }

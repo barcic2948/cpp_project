@@ -1,22 +1,18 @@
 #pragma once
 
+#include "component.h"
+
 #ifndef CUSTOM_TEXT_H
 #define CUSTOM_TEXT_H
 
-#include<SFML/Graphics.hpp>
-#include<string>
-#include<iostream>
-
-class Custom_Text {
+class Custom_Text : public Component {
     protected:
-        sf::Text *custom_text;
+        sf::Text *text;
     public:
-        Custom_Text(float x, float y, int charSize, std::string text, sf::Color color, sf::Font &font);
+        Custom_Text(float x, float y, std::string _text, sf::Font &font, int _char_size, sf::Color *_text_color);
         ~Custom_Text();
-        void draw(sf::RenderWindow* window);
-
-        void center();
-        
+        void draw(sf::RenderWindow *window) override;
+        void update(sf::RenderWindow *window) override;
 };
 
 #endif

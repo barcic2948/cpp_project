@@ -1,23 +1,24 @@
 #include "custom_text.h"
+#include "component.h"
 
-Custom_Text::Custom_Text(float x, float y, int charSize, std::string text,  sf::Color color, sf::Font &font) {
-    this->custom_text = new sf::Text();
-    custom_text->setFont(font);
-    custom_text->setString(text);
-    custom_text->setCharacterSize(charSize);
-    custom_text->setPosition(sf::Vector2f(x, y));
-    custom_text->setFillColor(color);
+Custom_Text::Custom_Text(float x, float y, std::string _text, sf::Font &font, int _char_size, sf::Color *_text_color) {
+    this->text = new sf::Text();
+    this->text->setPosition(x,y);
+    this->text->setFont(font);
+    this->text->setFillColor(*_text_color);
+    this->text->setString(_text);
+    this->text->setCharacterSize(_char_size);
 }
 
 Custom_Text::~Custom_Text() {
-    delete this->custom_text;
-    std::cout << "Removed Text!" << std::endl;
+    std::cout << "Removed Text" << std::endl;
+    delete this->text;
 }
 
-void Custom_Text::draw(sf::RenderWindow* window) {
-    window->draw(*custom_text);
+void Custom_Text::draw(sf::RenderWindow *window) {
+    window->draw(*this->text);
 }
 
-void Custom_Text::center() {
-    custom_text->setPosition(custom_text->getPosition().x - ((custom_text->getLocalBounds().width + custom_text->getLocalBounds().left) / 2), this->custom_text->getPosition().y);
+void Custom_Text::update(sf::RenderWindow *window) {
+    //std::cout << "update" << std::endl;
 }

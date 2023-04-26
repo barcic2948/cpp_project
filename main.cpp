@@ -1,11 +1,9 @@
 #include "src/game.h"
 
-
-int main()
-{  
+int main() {  
     Game tgame;
     if(tgame.init()) {
-        tgame.mainMenu();
+        tgame.run();
     }
     return 0;
 }

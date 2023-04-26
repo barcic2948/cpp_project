@@ -7,7 +7,7 @@ enable_testing()
 set(SFML_DIR "C:\\Users\\barci\\Desktop\\SFML-2.5.1")
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 
-add_executable(main main.cpp src/game.cpp src/game_entity.cpp src/player.cpp src/components/custom_text.cpp src/components/custom_button.cpp)
+add_executable(main main.cpp src/game.cpp src/components/component.h  src/components/button.cpp src/components/custom_text.cpp)
 
 target_link_libraries(main sfml-graphics sfml-audio)
 
