@@ -11,7 +11,7 @@ Custom_Text::Custom_Text(float x, float y, std::string _text, sf::Font &font, in
 }
 
 Custom_Text::~Custom_Text() {
-    std::cout << "Removed Text" << std::endl;
+    //std::cout << "Removed Text" << std::endl;
     delete this->text;
 }
 

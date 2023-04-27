@@ -46,8 +46,9 @@ void Game::main_menu() {
     Button *game_start = new Button(20, 100, 330, 40, "Main menu", this->font, 30, this->gate_color, this->text_color, this->hover_color);
     Button *options = new Button(20, 150, 330, 40, "Options", this->font, 30, this->gate_color, this->text_color, this->hover_color);
     Button *quit = new Button(20, 200, 330, 40, "Quit", this->font, 30, this->gate_color, this->text_color, this->hover_color);
+    Checkbox *test = new Checkbox(false, 400, 300, 50, 50, this->text_color);
 
-    this->game_elements = {title, game_start, options, quit};
+    this->game_elements = {title, game_start, options, quit, test};
 
     while (this->window->isOpen()){
         sf::Event e;
@@ -71,6 +72,10 @@ void Game::main_menu() {
                 }
                 else if (quit->getHover()) {
                     this->window->close();
+                }
+                else if (test->getHover()) {
+                    std::cout << "2137" << std::endl;
+                    test->state = !test->state;
                 }
             }
 

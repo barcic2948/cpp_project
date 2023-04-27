@@ -23,12 +23,12 @@ Button::Button(float x, float y, float width, float height, std::string _text, s
 Button::~Button() {
     delete this->text;
     delete this->shape;
-    std::cout << "Removed Button" << std::endl;
+    //std::cout << "Removed Button" << std::endl;
 }
 
 void Button::draw(sf::RenderWindow *window) {
-    window->draw(*shape);
-    window->draw(*text);
+    window->draw(*this->shape);
+    window->draw(*this->text);
 }
 
 void Button::update(sf::RenderWindow *window) {
@@ -42,6 +42,6 @@ void Button::update(sf::RenderWindow *window) {
     }
 }
 
-bool Button::getHover() {
+const bool Button::getHover() {
     return this->is_hover;
 }

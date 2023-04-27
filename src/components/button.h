@@ -18,7 +18,7 @@ class Button : public Component {
         ~Button();
         void draw(sf::RenderWindow *window) override;
         void update(sf::RenderWindow *window) override;
-        bool getHover();
+        const bool getHover();
 
 };
 
