@@ -69,6 +69,7 @@ void Game::main_menu() {
                 else if (options->getHover()){
                     std::cout << "Options" << std::endl;
                     this->options();
+                    break;  
                 }
                 else if (quit->getHover()) {
                     this->window->close();
@@ -119,6 +120,7 @@ void Game::options() {
                 else if (return_to_menu->getHover()){
                     std::cout << "Retrun to menu" << std::endl;
                     this->main_menu();
+                    break;
                 }
                 else if (quit->getHover()) {
                     this->window->close();
